@@ -1,0 +1,65 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+
+# macOS system files
+.DS_Store
+
+# dotenv file
+.env
+
+# Editor folders
+.vscode/
+.idea/
+
+# Temporary files
+*.log
+*.tmp
+*.bak
+
+# Word/docx temp
+~$*.docx
+*.docx.zip
+
+# Test output or generated files
+temp.docx
+*.pdf
+*.png
+*.jpg
+
+# Python specific
+dist/
+build/
+*.egg-info/
+pip-log.txt
+
+# Jupyter Notebook checkpoints (if used)
+.ipynb_checkpoints/
+
+# Local database
+*.sqlite3
+
+# Resume uploads or results
+uploads/
+parsed_output/
+
+# VSCode debug
+.vscode/
+
+# PDF2Image cache (if any)
+__pypdfium2_cache__/
+
+# PyInstaller
+*.spec
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json

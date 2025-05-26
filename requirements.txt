@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-docx
+pdfplumber
+pytesseract
+Pillow
+python-dotenv
+openai
+PyMuPDF
