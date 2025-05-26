@@ -18,6 +18,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/ping")
+async def health_check():
+    return {"status": "ok", "message": "Resume parser is running"}
+
+
 @app.post("/parse-resume")
 async def upload_resume(file: UploadFile = File(...)):
     content = await file.read()
