@@ -37,15 +37,24 @@ def extract_text_from_pdf(content: bytes) -> str:
 
     return text
 
-# OCR fallback for PDF
+import fitz  # PyMuPDF
+import easyocr
+from PIL import Image
+import numpy as np
+
+reader = easyocr.Reader(['en'], gpu=False)
+
 def extract_text_from_pdf_with_ocr(content: bytes) -> str:
     doc = fitz.open(stream=content, filetype="pdf")
     text = ""
     for page in doc:
         pix = page.get_pixmap()
-        image = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
-        text += pytesseract.image_to_string(image)
+        img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+        img_np = np.array(img)
+        result = reader.readtext(img_np, detail=0)
+        text += "\n".join(result) + "\n"
     return text
+
 
 # DOCX text extractor
 def extract_text_from_docx(content: bytes) -> str:
@@ -54,8 +63,10 @@ def extract_text_from_docx(content: bytes) -> str:
 
 # Image text extractor (OCR)
 def extract_text_from_image(content: bytes) -> str:
-    image = Image.open(io.BytesIO(content))
-    return pytesseract.image_to_string(image)
+    image = Image.open(io.BytesIO(content)).convert("RGB")
+    img_np = np.array(image)
+    result = reader.readtext(img_np, detail=0)
+    return "\n".join(result)
 
 # Transform raw resume text to structured JSON using OpenAI
 def transform_text_to_resume_data(raw_text: str) -> dict:
