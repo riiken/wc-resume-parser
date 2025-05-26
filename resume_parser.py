@@ -4,7 +4,6 @@ import fitz  # PyMuPDF
 import pdfplumber
 import docx
 from PIL import Image
-import pytesseract
 import json
 from dotenv import load_dotenv
 load_dotenv()
