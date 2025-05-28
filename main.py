@@ -2,7 +2,7 @@ from fastapi import FastAPI, UploadFile, File
 from dotenv import load_dotenv
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
-from resume_parser import parse_resume
+# from resume_parser import parse_resume
 
 # Load environment variables (for OPENAI_API_KEY)
 load_dotenv()
@@ -23,11 +23,11 @@ async def health_check():
     return {"status": "ok", "message": "Resume parser is running"}
 
 
-@app.post("/parse-resume")
-async def upload_resume(file: UploadFile = File(...)):
-    content = await file.read()
-    parsed_data = parse_resume(file.filename, content)
-    return {"resumeData": parsed_data}
+# @app.post("/parse-resume")
+# async def upload_resume(file: UploadFile = File(...)):
+#     content = await file.read()
+#     parsed_data = parse_resume(file.filename, content)
+#     return {"resumeData": parsed_data}
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
